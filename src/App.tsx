@@ -8,8 +8,6 @@ type Product = {
   category: "للنساء" | "للرجال" | "للأزواج" | "عناية" | "جل ومزلقات" | "صيدلية";
   image: string;
   badge?: string;
-  sourceUrl?: string;
-  reviewNote?: string;
 };
 
 type CartItem = Product & { quantity: number };
@@ -60,188 +58,7 @@ declare global {
   }
 }
 
-const products: Product[] = [
-  {
-    id: 1,
-    name: "LELO SONA 2",
-    description: "تقنية نبضات صوتية، 12 مستوى، سيليكون ناعم ومقاوم للماء بالكامل.",
-    price: 649,
-    category: "للنساء",
-    image: "/products/lelo-sona-2.jpg",
-    badge: "الأكثر طلبًا",
-  },
-  {
-    id: 2,
-    name: "Womanizer Premium 2",
-    description: "تقنية Pleasure Air، 14 مستوى مع Smart Silence ووضع Autopilot.",
-    price: 749,
-    category: "للنساء",
-    image: "/products/womanizer-premium-2.jpg",
-    badge: "فئة فاخرة",
-  },
-  {
-    id: 3,
-    name: "We-Vibe Chorus",
-    description: "جهاز مرن للأزواج، تحكم عن بُعد وعبر التطبيق ومقاوم للماء.",
-    price: 699,
-    category: "للأزواج",
-    image: "/products/we-vibe-chorus.jpg",
-    badge: "للأزواج",
-  },
-  {
-    id: 4,
-    name: "Fleshlight Quickshot Vantage",
-    description: "موديل أصلي مدمج ومفتوح من الطرفين، بخامة Real Feel Super Skin وسهل التنظيف.",
-    price: 159,
-    category: "للرجال",
-    image: "/products/fleshlight-quickshot-vantage.jpg",
-    badge: "اختيار GQ",
-    sourceUrl: "https://www.fleshlight.com/products/quickshot-vantage",
-    reviewNote: "4.7/5 من 499 مراجعة رسمية؛ راجعته GQ وMen’s Health بالاسم.",
-  },
-  {
-    id: 5,
-    name: "Durex Play 2 in 1",
-    description: "جل مساج ومزلق مائي لطيف على البشرة، عبوة عملية بحجم 200 مل.",
-    price: 79,
-    category: "جل ومزلقات",
-    image: "/products/durex-play.jpg",
-    badge: "200 مل",
-  },
-  {
-    id: 6,
-    name: "Satisfyer Pro 2 Gen 3",
-    description: "تقنية Air Pulse مع 11 مستوى، تشغيل هادئ ومقاومة كاملة للماء.",
-    price: 279,
-    category: "للنساء",
-    image: "/products/satisfyer-pro-2.jpg",
-    badge: "قيمة ممتازة",
-  },
-  {
-    id: 7,
-    name: "Durex Extra Safe — 12",
-    description: "واقيات لاتكس بسماكة إضافية ومزلق أكثر، عبوة تحتوي على 12 قطعة.",
-    price: 49,
-    category: "صيدلية",
-    image: "/products/durex-extra-safe.jpg",
-    badge: "12 قطعة",
-  },
-  {
-    id: 8,
-    name: "K-Y Jelly — 100g",
-    description: "مزلق شخصي مائي شفاف، غير دهني وسهل الغسل للاستخدام الحميم.",
-    price: 45,
-    category: "جل ومزلقات",
-    image: "/products/ky-jelly.jpg",
-  },
-  {
-    id: 9,
-    name: "Vagisil pH Balance Wash",
-    description: "غسول خارجي لطيف للعناية اليومية بالمنطقة الحساسة وتوازن الحموضة.",
-    price: 69,
-    category: "عناية",
-    image: "/products/vagisil-ph-balance.jpg",
-    badge: "عناية يومية",
-  },
-  {
-    id: 10,
-    name: "Canesten 1% Cream — 20g",
-    description:
-      "كريم كلوتريمازول مضاد للفطريات للاستخدام الخارجي؛ يُستخدم حسب النشرة وإرشاد الصيدلي.",
-    price: 39,
-    category: "صيدلية",
-    image: "/products/canesten-cream.jpg",
-    badge: "دواء بدون وصفة*",
-  },
-  {
-    id: 11,
-    name: "Clearblue Pregnancy Test",
-    description:
-      "اختبار حمل منزلي سريع وسهل القراءة؛ اتبعي التعليمات المرفقة للحصول على نتيجة دقيقة.",
-    price: 59,
-    category: "صيدلية",
-    image: "/products/clearblue-test.jpg",
-  },
-  {
-    id: 12,
-    name: "STUD 100 Delay Spray",
-    description:
-      "بخاخ موضعي للرجال يحتوي على ليدوكايين؛ استخدم أقل كمية وفق النشرة وبعد استشارة الصيدلي.",
-    price: 89,
-    category: "صيدلية",
-    image: "/products/stud-delay-spray.jpg",
-    badge: "استخدام موضعي",
-  },
-  {
-    id: 13,
-    name: "Arcwave Ion 2",
-    description:
-      "تقنية Pleasure Air للرجال، سيليكون CleanTech ناعم، مقاومة IPX7 وتشغيل Smart Silence.",
-    price: 549,
-    category: "للرجال",
-    image: "/products/arcwave-ion-2.jpg",
-    badge: "تقنية Pleasure Air",
-    sourceUrl: "https://www.arcwave.com/us/ion-2",
-    reviewNote: "موديل Ion 2 الحالي موثّق من Arcwave؛ السعر الرسمي وقت المراجعة 135 دولارًا.",
-  },
-  {
-    id: 14,
-    name: "TENGA FLIP ZERO Black",
-    description:
-      "خامة داخلية أكثر صلابة وملمس مكثّف مع تحكم بالضغط، يفتح بالكامل لتسهيل الغسل والتجفيف.",
-    price: 449,
-    category: "للرجال",
-    image: "/products/tenga-flip-zero-black.jpg",
-    badge: "142 مراجعة",
-    sourceUrl: "https://usstore.tenga.co/products/tfz-002",
-    reviewNote: "3.99/5 من 142 مراجعة على متجر TENGA الرسمي.",
-  },
-  {
-    id: 15,
-    name: "LELO F1S V3",
-    description:
-      "الإصدار الثالث بتفاعل مدعوم بالذكاء الاصطناعي، سيليكون Real‑Feel واتصال بتطبيق LELO.",
-    price: 749,
-    category: "للرجال",
-    image: "/products/lelo-f1s-v3.webp",
-    badge: "تقنية متقدمة",
-    sourceUrl: "https://www.lelo.com/f1s-v3",
-    reviewNote: "4.22/5 من 236 مراجعة على صفحة LELO الرسمية للموديل نفسه.",
-  },
-  {
-    id: 16,
-    name: "Lovense MAX 2",
-    description: "تحكم عبر التطبيق مع اهتزاز مزدوج وانقباض بمضخة هواء، ويدعم التحكم عن بُعد.",
-    price: 369,
-    category: "للرجال",
-    image: "/products/lovense-max-2.jpg",
-    badge: "تحكم بالتطبيق",
-    sourceUrl: "https://www.lovense.com/male-masturbators",
-    reviewNote: "4.6/5 من 316 مراجعة على صفحة Lovense الرسمية.",
-  },
-  {
-    id: 17,
-    name: "Durex Massage Soothing 2 in 1 — 200ml",
-    description: "جل مساج ومزلق مائي مع الألوفيرا وفيتامين E؛ يذكر المصنع أنه مناسب للاستخدام مع الواقيات الذكرية.",
-    price: 69,
-    category: "جل ومزلقات",
-    image: "/products/durex-soothing-illustration.svg",
-    badge: "200 مل",
-    sourceUrl: "https://durexme.com/ar/all-products/lubes/durex-massage-soothing-2-in-1",
-    reviewNote: "السعر تقديري وصورة المنتج توضيحية وليست صورة العبوة الأصلية. اتبع تعليمات العبوة وتوقف عند حدوث تهيّج.",
-  },
-  {
-    id: 18,
-    name: "pjur ORIGINAL — 100ml",
-    description: "مزلق سيليكوني طويل الأمد مناسب للمساج ومتوافق مع الواقيات المصنوعة من اللاتكس وفق الشركة المصنّعة.",
-    price: 119,
-    category: "جل ومزلقات",
-    image: "/products/pjur-original-illustration.svg",
-    badge: "100 مل",
-    sourceUrl: "https://www.pjur.com/en/product/pjur-original/",
-    reviewNote: "السعر تقديري وصورة المنتج توضيحية وليست صورة العبوة الأصلية. قد لا يناسب بعض الألعاب المصنوعة من السيليكون؛ راجع تعليمات الشركة.",
-  },
-];
+const products: Product[] = [];
 
 const categories = ["الكل", "للنساء", "للرجال", "للأزواج", "عناية", "جل ومزلقات", "صيدلية"] as const;
 
@@ -738,22 +555,6 @@ export default function App() {
                     <p className="mt-2 max-w-xs text-sm leading-6 text-[#7a6d6b]">
                       {product.description}
                     </p>
-                    {product.reviewNote && (
-                      <p className="mt-3 max-w-xs border-r-2 border-[#b98a84] pr-3 text-xs leading-5 text-[#655a58]">
-                        {product.reviewNote}
-                      </p>
-                    )}
-                    {product.sourceUrl && (
-                      <a
-                        href={product.sourceUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-[#865156] underline decoration-[#c5a5a1] underline-offset-4"
-                      >
-                        صفحة المنتج الرسمية
-                        <Icon name="arrow" className="h-3 w-3 rotate-180" />
-                      </a>
-                    )}
                   </div>
                   <p className="shrink-0 pt-5 font-bold">
                     {product.price} <span className="text-xs font-medium">ر.س</span>
@@ -768,32 +569,14 @@ export default function App() {
               </article>
             ))}
           </div>
-          <section className="mt-12 rounded-[2rem] border border-[#dfd0ca] bg-[#f1e8e3] p-6 sm:p-8">
-            <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-              <div>
-                <p className="mb-2 text-xs font-bold tracking-[.18em] text-[#9a625f]">قريبًا إلى سِتر</p>
-                <h3 className="text-2xl font-semibold">أصناف نعمل على التحقق منها</h3>
-              </div>
-              <p className="max-w-lg text-xs leading-6 text-[#786b68]">لن تظهر هذه الأصناف للبيع قبل التحقق من المكونات والمصدر والتسجيل والسماح بالتداول في بلد الشحن.</p>
+          {filteredProducts.length === 0 && (
+            <div className="mt-8 rounded-[2rem] border border-[#dfd0ca] bg-white/70 px-6 py-14 text-center">
+              <h3 className="text-xl font-semibold">نعيد تجهيز قائمة المنتجات</h3>
+              <p className="mx-auto mt-3 max-w-lg text-sm leading-7 text-[#786b68]">
+                أزلنا المنتجات السابقة. ستظهر هنا المنتجات الجديدة بعد التحقق من بياناتها وصورها وأسعارها والسماح بتداولها.
+              </p>
             </div>
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {[
-                ["حبوب مقوية للرجال", "قيد التحقق من التسجيل والمكونات ومصدر التوريد."],
-                ["جل وكريمات تأخير القذف", "تُضاف بعد التأكد من التركيبة والترخيص وتعليمات الاستخدام."],
-                ["حبوب مخصصة للنساء", "لا تُعرض قبل التحقق من السلامة والتسجيل والادعاءات المسموح بها."],
-                ["علكة جنسية", "قيد مراجعة المكونات والمصدر والاشتراطات المحلية."],
-                ["قطرات مخصصة للنساء", "قيد التحقق؛ لا توجد حالياً منتجات مفعّلة للشراء ضمن هذا الصنف."],
-              ].map(([name, detail]) => (
-                <div key={name} className="rounded-2xl border border-[#e2d5d0] bg-white/75 p-5">
-                  <div className="mb-3 flex items-center justify-between gap-3">
-                    <h4 className="font-semibold">{name}</h4>
-                    <span className="shrink-0 rounded-full bg-[#eee3df] px-3 py-1 text-[10px] font-semibold text-[#815054]">قريبًا</span>
-                  </div>
-                  <p className="text-xs leading-6 text-[#786b68]">{detail}</p>
-                </div>
-              ))}
-            </div>
-          </section>
+          )}
         </section>
 
         <section id="privacy" className="bg-[#2d2524] text-white">
