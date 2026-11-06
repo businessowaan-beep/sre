@@ -5,7 +5,7 @@ type Product = {
   name: string;
   description: string;
   price: number;
-  category: "للنساء" | "للرجال" | "للأزواج" | "عناية" | "صيدلية";
+  category: "للنساء" | "للرجال" | "للأزواج" | "عناية" | "جل ومزلقات" | "صيدلية";
   image: string;
   badge?: string;
   sourceUrl?: string;
@@ -104,7 +104,7 @@ const products: Product[] = [
     name: "Durex Play 2 in 1",
     description: "جل مساج ومزلق مائي لطيف على البشرة، عبوة عملية بحجم 200 مل.",
     price: 79,
-    category: "عناية",
+    category: "جل ومزلقات",
     image: "/products/durex-play.jpg",
     badge: "200 مل",
   },
@@ -131,7 +131,7 @@ const products: Product[] = [
     name: "K-Y Jelly — 100g",
     description: "مزلق شخصي مائي شفاف، غير دهني وسهل الغسل للاستخدام الحميم.",
     price: 45,
-    category: "عناية",
+    category: "جل ومزلقات",
     image: "/products/ky-jelly.jpg",
   },
   {
@@ -219,9 +219,31 @@ const products: Product[] = [
     sourceUrl: "https://www.lovense.com/male-masturbators",
     reviewNote: "4.6/5 من 316 مراجعة على صفحة Lovense الرسمية.",
   },
+  {
+    id: 17,
+    name: "Durex Massage Soothing 2 in 1 — 200ml",
+    description: "جل مساج ومزلق مائي مع الألوفيرا وفيتامين E؛ يذكر المصنع أنه مناسب للاستخدام مع الواقيات الذكرية.",
+    price: 69,
+    category: "جل ومزلقات",
+    image: "/products/durex-soothing-illustration.svg",
+    badge: "200 مل",
+    sourceUrl: "https://durexme.com/ar/all-products/lubes/durex-massage-soothing-2-in-1",
+    reviewNote: "صورة توضيحية وليست صورة العبوة الأصلية. اتبع تعليمات العبوة وتوقف عند حدوث تهيّج.",
+  },
+  {
+    id: 18,
+    name: "pjur ORIGINAL — 100ml",
+    description: "مزلق سيليكوني طويل الأمد مناسب للمساج ومتوافق مع الواقيات المصنوعة من اللاتكس وفق الشركة المصنّعة.",
+    price: 119,
+    category: "جل ومزلقات",
+    image: "/products/pjur-original-illustration.svg",
+    badge: "100 مل",
+    sourceUrl: "https://www.pjur.com/en/product/pjur-original/",
+    reviewNote: "صورة توضيحية وليست صورة العبوة الأصلية. قد لا يناسب بعض الألعاب المصنوعة من السيليكون؛ راجع تعليمات الشركة.",
+  },
 ];
 
-const categories = ["الكل", "للنساء", "للرجال", "للأزواج", "عناية", "صيدلية"] as const;
+const categories = ["الكل", "للنساء", "للرجال", "للأزواج", "عناية", "جل ومزلقات", "صيدلية"] as const;
 
 function Icon({
   name,
@@ -692,7 +714,7 @@ export default function App() {
 
           <div className="grid gap-x-5 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
             {filteredProducts.map((product) => (
-              <article key={product.id} className="group">
+              <article key={product.id} className="group overflow-hidden rounded-[1.75rem] border border-[#e9dfda] bg-white/80 p-3 shadow-[0_8px_30px_rgba(66,43,39,.045)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_42px_rgba(66,43,39,.10)] sm:p-4">
                 <div className="relative overflow-hidden rounded-[1.75rem]">
                   <ProductVisual product={product} />
                   {product.badge && (
@@ -702,12 +724,12 @@ export default function App() {
                   )}
                   <button
                     onClick={() => addToCart(product)}
-                    className="absolute bottom-4 left-4 right-4 translate-y-3 rounded-full bg-[#2c2423] px-5 py-3.5 text-sm font-semibold text-white opacity-0 shadow-lg transition duration-300 hover:bg-[#6e3940] group-hover:translate-y-0 group-hover:opacity-100 focus:translate-y-0 focus:opacity-100"
+                    className="absolute bottom-4 left-4 right-4 rounded-full bg-[#2c2423]/95 px-5 py-3.5 text-sm font-semibold text-white shadow-lg transition duration-300 hover:bg-[#6e3940] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                   >
                     أضف إلى السلة
                   </button>
                 </div>
-                <div className="mt-5 flex items-start justify-between gap-4">
+                <div className="mt-5 flex items-start justify-between gap-4 px-1">
                   <div>
                     <p className="mb-1.5 text-[11px] font-semibold text-[#9a6a65]">
                       {product.category}
@@ -739,7 +761,7 @@ export default function App() {
                 </div>
                 <button
                   onClick={() => addToCart(product)}
-                  className="mt-4 w-full rounded-full border border-[#cfc0bc] py-3 text-sm font-semibold sm:hidden"
+                  className="mt-4 w-full rounded-full border border-[#cfc0bc] py-3 text-sm font-semibold transition hover:border-[#6e3940] hover:bg-[#f8f1ee] sm:hidden"
                 >
                   أضف إلى السلة
                 </button>
@@ -751,6 +773,32 @@ export default function App() {
             المنتج الفعلية؛ الأسعار بالريال تقديرية للبيع محليًا وقد تتغير. المنتجات الدوائية تُباع فقط
             حيث يسمح النظام المحلي، ولا تغني المعلومات عن استشارة الطبيب أو الصيدلي.
           </div>
+          <section className="mt-12 rounded-[2rem] border border-[#dfd0ca] bg-[#f1e8e3] p-6 sm:p-8">
+            <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <p className="mb-2 text-xs font-bold tracking-[.18em] text-[#9a625f]">قريبًا إلى سِتر</p>
+                <h3 className="text-2xl font-semibold">أصناف نعمل على التحقق منها</h3>
+              </div>
+              <p className="max-w-lg text-xs leading-6 text-[#786b68]">لن تظهر هذه الأصناف للبيع قبل التحقق من المكونات والمصدر والتسجيل والسماح بالتداول في بلد الشحن.</p>
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {[
+                ["حبوب مقوية للرجال", "قيد التحقق من التسجيل والمكونات ومصدر التوريد."],
+                ["جل وكريمات تأخير القذف", "تُضاف بعد التأكد من التركيبة والترخيص وتعليمات الاستخدام."],
+                ["حبوب مخصصة للنساء", "لا تُعرض قبل التحقق من السلامة والتسجيل والادعاءات المسموح بها."],
+                ["علكة جنسية", "قيد مراجعة المكونات والمصدر والاشتراطات المحلية."],
+                ["قطرات مخصصة للنساء", "قيد التحقق؛ لا توجد حالياً منتجات مفعّلة للشراء ضمن هذا الصنف."],
+              ].map(([name, detail]) => (
+                <div key={name} className="rounded-2xl border border-[#e2d5d0] bg-white/75 p-5">
+                  <div className="mb-3 flex items-center justify-between gap-3">
+                    <h4 className="font-semibold">{name}</h4>
+                    <span className="shrink-0 rounded-full bg-[#eee3df] px-3 py-1 text-[10px] font-semibold text-[#815054]">قريبًا</span>
+                  </div>
+                  <p className="text-xs leading-6 text-[#786b68]">{detail}</p>
+                </div>
+              ))}
+            </div>
+          </section>
         </section>
 
         <section id="privacy" className="bg-[#2d2524] text-white">
