@@ -89,3 +89,33 @@
     animation-duration: 0.01ms !important;
   }
 }
+
+/* تحسينات واجهة المتجر */
+.product-visual img {
+  display: block;
+  transition: transform 0.45s ease;
+}
+
+.group:hover .product-visual img {
+  transform: scale(1.035);
+}
+
+.category-scroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-snap-type: x proximity;
+}
+
+.category-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.category-scroll > button {
+  scroll-snap-align: start;
+}
+
+@media (max-width: 639px) {
+  .product-visual {
+    border-radius: 1.25rem;
+  }
+}
