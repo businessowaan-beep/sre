@@ -768,12 +768,6 @@ export default function App() {
               </article>
             ))}
           </div>
-          <div className="mx-auto mt-10 max-w-3xl rounded-2xl border border-[#d8cbc7] bg-white/60 px-5 py-4 text-center text-[11px] leading-6 text-[#786b68]">
-            روابط صفحات المنتجات الرسمية مرجع لمواصفات الشركة المصنّعة، ولا تعني توفر المنتج محليًا.
-            الصور التوضيحية موسومة بذلك داخل بطاقة المنتج، والأسعار بالريال تقديرية وتحتاج تأكيدًا قبل البيع.
-            المنتجات الدوائية أو ذات الادعاءات الصحية تُعرض فقط بعد التحقق من التسجيل والسماح النظامي في بلد الشحن،
-            ولا تغني المعلومات عن استشارة الطبيب أو الصيدلي.
-          </div>
           <section className="mt-12 rounded-[2rem] border border-[#dfd0ca] bg-[#f1e8e3] p-6 sm:p-8">
             <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
               <div>
