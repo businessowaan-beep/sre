@@ -228,7 +228,7 @@ const products: Product[] = [
     image: "/products/durex-soothing-illustration.svg",
     badge: "200 مل",
     sourceUrl: "https://durexme.com/ar/all-products/lubes/durex-massage-soothing-2-in-1",
-    reviewNote: "صورة توضيحية وليست صورة العبوة الأصلية. اتبع تعليمات العبوة وتوقف عند حدوث تهيّج.",
+    reviewNote: "السعر تقديري وصورة المنتج توضيحية وليست صورة العبوة الأصلية. اتبع تعليمات العبوة وتوقف عند حدوث تهيّج.",
   },
   {
     id: 18,
@@ -239,7 +239,7 @@ const products: Product[] = [
     image: "/products/pjur-original-illustration.svg",
     badge: "100 مل",
     sourceUrl: "https://www.pjur.com/en/product/pjur-original/",
-    reviewNote: "صورة توضيحية وليست صورة العبوة الأصلية. قد لا يناسب بعض الألعاب المصنوعة من السيليكون؛ راجع تعليمات الشركة.",
+    reviewNote: "السعر تقديري وصورة المنتج توضيحية وليست صورة العبوة الأصلية. قد لا يناسب بعض الألعاب المصنوعة من السيليكون؛ راجع تعليمات الشركة.",
   },
 ];
 
@@ -319,7 +319,7 @@ function ProductVisual({ product, large = false }: { product: Product; large?: b
       <img
         src={product.image}
         alt={product.name}
-        className="h-full w-full object-cover"
+        className={`h-full w-full ${product.image.endsWith(".svg") ? "object-contain p-5" : "object-cover"}`}
         loading="lazy"
       />
     </div>
@@ -724,7 +724,7 @@ export default function App() {
                   )}
                   <button
                     onClick={() => addToCart(product)}
-                    className="absolute bottom-4 left-4 right-4 rounded-full bg-[#2c2423]/95 px-5 py-3.5 text-sm font-semibold text-white shadow-lg transition duration-300 hover:bg-[#6e3940] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                    className="absolute bottom-4 left-4 right-4 hidden translate-y-3 rounded-full bg-[#2c2423]/95 px-5 py-3.5 text-sm font-semibold text-white opacity-0 shadow-lg transition duration-300 hover:bg-[#6e3940] group-hover:translate-y-0 group-hover:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:block"
                   >
                     أضف إلى السلة
                   </button>
