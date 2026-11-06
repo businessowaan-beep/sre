@@ -77,6 +77,60 @@ const products: Product[] = [
     image: "https://static.polza.ru/iblock/3d3/3d3a8d3062c963981bd6484ef4f26240/71bb0a075680c19b7fc42acf8e46fc83.jpeg?fmt=avif&quality=100",
     badge: "200 مل",
   },
+  {
+    id: 3,
+    name: "Carex Classic – 12 قطعة",
+    description: "واقي ذكري من اللاتكس الطبيعي بتصميم أملس كلاسيكي، عرض اسمي 52±2 مم وطول لا يقل عن 160 مم. متوفر من الشركة بعبوات 3 و12 قطعة.",
+    price: 0,
+    category: "للأزواج",
+    image: "https://carexcondoms.com/wp-content/uploads/2018/07/Products_0017_Classic-600x600.jpg",
+    badge: "12 قطعة",
+  },
+  {
+    id: 4,
+    name: "Carex Delay – 12 قطعة",
+    description: "واقي ذكري من اللاتكس الطبيعي يحتوي على بنزوكايين وفق وصف الشركة للمساعدة على إطالة فترة الاستمتاع. اتبع تعليمات العبوة وتوقف عند حدوث تهيّج أو خدر غير مرغوب.",
+    price: 0,
+    category: "للرجال",
+    image: "https://carexcondoms.com/wp-content/uploads/2018/07/Products_0013_Delay-600x600.jpg",
+    badge: "تأخير – 12 قطعة",
+  },
+  {
+    id: 5,
+    name: "Carex Classic Comfort – 12 قطعة",
+    description: "واقي ذكري من اللاتكس الطبيعي بتصميم مريح ومنتفخ الرأس، عرض اسمي 52±2 مم وطول لا يقل عن 160 مم.",
+    price: 0,
+    category: "للأزواج",
+    image: "https://carexcondoms.com/wp-content/uploads/2018/07/Products_0016_Classic-Comfort-600x600.jpg",
+    badge: "12 قطعة",
+  },
+  {
+    id: 6,
+    name: "Carex Classic Extra Lube – 12 قطعة",
+    description: "واقي ذكري أملس من اللاتكس الطبيعي مع كمية مزلق أكثر بنسبة 50% مقارنة بالواقي الكلاسيكي حسب وصف الشركة المصنّعة.",
+    price: 0,
+    category: "للأزواج",
+    image: "https://carexcondoms.com/wp-content/uploads/2018/07/Products_0015_Classic-Extra-Lube-600x600.jpg",
+    badge: "مزلق إضافي – 12 قطعة",
+  },
+  {
+    id: 7,
+    name: "Carex Assorted Flavours – 12 قطعة",
+    description: "واقيات ذكريّة من اللاتكس الطبيعي بنكهات فواكه متنوعة تشمل الفراولة والموز والعنب والبرتقال والتفاح والكشمش الأسود.",
+    price: 0,
+    category: "للأزواج",
+    image: "https://carexcondoms.com/wp-content/uploads/2018/07/Products_0018_Assorted-Flavours-600x600.jpg",
+    badge: "نكهات متنوعة – 12 قطعة",
+  },
+  {
+    id: 8,
+    name: "Carex Multi Pleasure – 12 قطعة",
+    description: "عبوة متنوعة من الواقيات الذكرية بالأنواع الأملس والمضلع والمنقط والرقيق، مع نكهات الفراولة والموز والشوكولاتة وفق وصف الشركة.",
+    price: 0,
+    category: "للأزواج",
+    image: "https://carexcondoms.com/wp-content/uploads/2018/07/Products_0009_Multi-Pleasure-600x600.jpg",
+    badge: "تشكيلة متنوعة – 12 قطعة",
+  },
 ];
 
 const categories = ["الكل", "للنساء", "للرجال", "للأزواج", "عناية", "جل ومزلقات", "صيدلية"] as const;
@@ -288,6 +342,7 @@ export default function App() {
   const paypalTotalUsd = (total / 3.75).toFixed(2);
 
   const addToCart = (product: Product) => {
+    if (product.price <= 0) return;
     setCart((items) => {
       const existing = items.find((item) => item.id === product.id);
       return existing
@@ -560,9 +615,10 @@ export default function App() {
                   )}
                   <button
                     onClick={() => addToCart(product)}
-                    className="absolute bottom-4 left-4 right-4 hidden translate-y-3 rounded-full bg-[#2c2423]/95 px-5 py-3.5 text-sm font-semibold text-white opacity-0 shadow-lg transition duration-300 hover:bg-[#6e3940] group-hover:translate-y-0 group-hover:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:block"
+                    disabled={product.price <= 0}
+                    className="absolute bottom-4 left-4 right-4 hidden translate-y-3 rounded-full bg-[#2c2423]/95 px-5 py-3.5 text-sm font-semibold text-white opacity-0 shadow-lg transition duration-300 hover:bg-[#6e3940] group-hover:translate-y-0 group-hover:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white disabled:cursor-not-allowed disabled:bg-[#766967] sm:block"
                   >
-                    أضف إلى السلة
+                    {product.price > 0 ? "أضف إلى السلة" : "بانتظار تحديد السعر"}
                   </button>
                 </div>
                 <div className="mt-5 flex items-start justify-between gap-4 px-1">
@@ -575,15 +631,20 @@ export default function App() {
                       {product.description}
                     </p>
                   </div>
-                  <p className="shrink-0 pt-5 font-bold">
-                    {product.price} <span className="text-xs font-medium">ر.س</span>
+                  <p className="shrink-0 pt-5 text-left font-bold">
+                    {product.price > 0 ? (
+                      <>{product.price} <span className="text-xs font-medium">ر.س</span></>
+                    ) : (
+                      <span className="text-xs font-semibold text-[#9a625f]">السعر يحدد لاحقًا</span>
+                    )}
                   </p>
                 </div>
                 <button
                   onClick={() => addToCart(product)}
-                  className="mt-4 w-full rounded-full border border-[#cfc0bc] py-3 text-sm font-semibold transition hover:border-[#6e3940] hover:bg-[#f8f1ee] sm:hidden"
+                  disabled={product.price <= 0}
+                  className="mt-4 w-full rounded-full border border-[#cfc0bc] py-3 text-sm font-semibold transition hover:border-[#6e3940] hover:bg-[#f8f1ee] disabled:cursor-not-allowed disabled:opacity-60 sm:hidden"
                 >
-                  أضف إلى السلة
+                  {product.price > 0 ? "أضف إلى السلة" : "بانتظار تحديد السعر"}
                 </button>
               </article>
             ))}
