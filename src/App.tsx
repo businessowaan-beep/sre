@@ -546,51 +546,48 @@ export default function App() {
       </header>
 
       <main>
-        <section className="relative overflow-hidden bg-[#f1e9e4]">
-          <div className="absolute -left-24 -top-24 h-72 w-72 rounded-full bg-[#d8bdb5]/35 blur-3xl" />
-          <div className="mx-auto grid max-w-7xl items-center gap-7 px-4 pb-9 pt-8 sm:px-6 sm:py-14 lg:grid-cols-[1.05fr_.95fr] lg:px-8 lg:py-20">
+        <section className="relative isolate overflow-hidden bg-[#211b1c] text-white">
+          <div className="pointer-events-none absolute -right-24 -top-32 h-80 w-80 rounded-full bg-[#8e5053]/30 blur-3xl sm:h-[34rem] sm:w-[34rem]" />
+          <div className="pointer-events-none absolute -bottom-40 left-[12%] h-80 w-80 rounded-full bg-[#b87972]/15 blur-3xl" />
+          <div className="relative mx-auto grid max-w-7xl items-center gap-8 px-4 py-9 sm:px-6 sm:py-14 lg:grid-cols-[1.05fr_.95fr] lg:gap-14 lg:px-8 lg:py-20">
             <div className="relative z-10 max-w-2xl">
-              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#d7c3bc] bg-white/70 px-3 py-2 text-[11px] font-semibold text-[#75464a] sm:mb-6 sm:px-4 sm:text-xs">
+              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[.06] px-3.5 py-2 text-[11px] font-semibold text-[#e2b9b0] sm:mb-6 sm:text-xs">
                 <Icon name="shield" className="h-4 w-4" /> خصوصية وراحة من أول خطوة
               </div>
-              <h1 className="text-balance text-[2.55rem] font-semibold leading-[1.18] tracking-tight sm:text-6xl lg:text-7xl">
+              <h1 className="text-balance text-[2.55rem] font-bold leading-[1.2] tracking-tight sm:text-6xl lg:text-7xl">
                 عنايتك الخاصة،
-                <span className="block text-[#95615d]">بكل راحة وخصوصية.</span>
+                <span className="block text-[#d39b91]">بكل راحة وخصوصية.</span>
               </h1>
-              <p className="mt-4 max-w-xl text-sm leading-7 text-[#746866] sm:mt-6 sm:text-lg sm:leading-8">
+              <p className="mt-4 max-w-xl text-sm leading-7 text-white/65 sm:mt-6 sm:text-lg sm:leading-8">
                 اكتشف منتجات مختارة للبالغين، وتسوّق بتجربة بسيطة وواضحة وتغليف محايد يحترم خصوصيتك.
               </p>
               <div className="mt-6 grid grid-cols-1 gap-3 sm:mt-8 sm:flex sm:flex-wrap">
-                <a href="#products" className="inline-flex min-h-14 items-center justify-center gap-3 rounded-2xl bg-[#2d2524] px-7 py-4 text-sm font-semibold text-white shadow-lg shadow-[#2d2524]/10 transition hover:bg-[#6e3940] sm:rounded-full sm:text-base">
+                <a href="#products" className="inline-flex min-h-12 items-center justify-center gap-3 rounded-2xl bg-[#d5a097] px-7 py-3.5 text-sm font-bold text-[#2c2021] shadow-lg shadow-black/15 transition hover:bg-[#e5b7ae] sm:rounded-full sm:text-base">
                   تسوّق الآن <Icon name="arrow" className="h-4 w-4 rotate-180" />
                 </a>
-                <a href="#privacy" className="inline-flex min-h-14 items-center justify-center rounded-2xl border border-[#bfaeaa] bg-white/55 px-6 py-4 text-sm font-semibold transition hover:bg-white sm:rounded-full sm:text-base">
+                <a href="#privacy" className="inline-flex min-h-12 items-center justify-center rounded-2xl border border-white/20 px-6 py-3.5 text-sm font-semibold text-white/85 transition hover:bg-white/10 sm:rounded-full sm:text-base">
                   تعرّف على سياسة الخصوصية
                 </a>
               </div>
-              <div className="mt-6 flex flex-wrap gap-x-5 gap-y-3 text-[11px] text-[#6f6260] sm:mt-9 sm:gap-x-7 sm:text-xs">
-                <span className="flex items-center gap-2"><Icon name="lock" className="h-4 w-4" /> خصوصية الطلب</span>
-                <span className="flex items-center gap-2"><Icon name="truck" className="h-4 w-4" /> تغليف محايد</span>
-                <span className="flex items-center gap-2"><Icon name="shield" className="h-4 w-4" /> خيارات واضحة</span>
+              <div className="mt-6 flex flex-wrap gap-x-5 gap-y-3 border-t border-white/10 pt-5 text-[11px] text-white/60 sm:mt-9 sm:gap-x-7 sm:text-xs">
+                <span className="flex items-center gap-2"><Icon name="lock" className="h-4 w-4 text-[#d39b91]" /> خصوصية الطلب</span>
+                <span className="flex items-center gap-2"><Icon name="truck" className="h-4 w-4 text-[#d39b91]" /> تغليف محايد</span>
+                <span className="flex items-center gap-2"><Icon name="shield" className="h-4 w-4 text-[#d39b91]" /> خيارات واضحة</span>
               </div>
             </div>
-            <div className="relative mx-auto flex min-h-[245px] w-full max-w-xl items-center justify-center overflow-hidden rounded-[2rem] border border-white/60 bg-gradient-to-br from-[#dfc9c0] via-[#eadbd4] to-[#c9a9a1] p-5 shadow-[0_24px_60px_rgba(86,49,52,.10)] sm:min-h-[430px] sm:rounded-[2.5rem] sm:p-8">
-              <div className="absolute inset-4 rounded-[1.5rem] border border-white/45 sm:inset-6 sm:rounded-[2rem]" />
-              <div className="relative grid w-full max-w-[390px] grid-cols-2 items-end gap-3 sm:gap-5">
-                <div className="rounded-[1.5rem] bg-white/75 p-3 shadow-xl shadow-[#70484a]/10 backdrop-blur sm:rounded-[2rem] sm:p-5">
-                  <div className="mb-3 flex aspect-[4/5] items-center justify-center overflow-hidden rounded-[1.1rem] bg-[#f4eeea] sm:rounded-[1.5rem]">
-                    <div className="h-[72%] w-[48%] rounded-[2.5rem_2.5rem_1.5rem_1.5rem] bg-gradient-to-b from-[#b47b78] to-[#74434a] shadow-xl" />
-                  </div>
-                  <p className="text-center text-[10px] font-semibold text-[#765451] sm:text-xs">اختيارات بعناية</p>
-                </div>
-                <div className="translate-y-5 rounded-[1.5rem] bg-[#6e3940] p-3 text-white shadow-xl shadow-[#70484a]/20 sm:translate-y-8 sm:rounded-[2rem] sm:p-5">
-                  <div className="mb-3 flex aspect-[4/5] items-center justify-center overflow-hidden rounded-[1.1rem] bg-[#8b5b5d] sm:rounded-[1.5rem]">
-                    <div className="h-[68%] w-[52%] rounded-[1.5rem] border border-white/30 bg-gradient-to-b from-[#e2c7bd] to-[#b8867e] shadow-xl" />
-                  </div>
-                  <p className="text-center text-[10px] font-semibold text-white/90 sm:text-xs">خصوصية بكل تفصيل</p>
-                </div>
+            <div className="relative mx-auto flex min-h-[235px] w-full max-w-xl items-center justify-center overflow-hidden rounded-[1.7rem] border border-white/10 bg-gradient-to-br from-[#493236] via-[#38272a] to-[#282021] p-5 shadow-2xl shadow-black/30 sm:min-h-[420px] sm:rounded-[2.4rem] sm:p-8">
+              <div className="absolute inset-4 rounded-[1.3rem] border border-white/10 sm:inset-6 sm:rounded-[1.8rem]" />
+              <div className="absolute -left-8 top-6 h-32 w-32 rounded-full border border-[#d7a39a]/20 sm:left-5 sm:top-10 sm:h-56 sm:w-56" />
+              <div className="absolute -left-1 top-12 h-20 w-20 rounded-full border border-[#d7a39a]/15 sm:left-12 sm:top-20 sm:h-40 sm:w-40" />
+              <div className="absolute right-[27%] top-[18%] h-[55%] w-[25%] rotate-[9deg] rounded-[2rem_2rem_1.4rem_1.4rem] border border-white/20 bg-gradient-to-b from-[#d9b4a7] via-[#a56f6b] to-[#70464a] shadow-[0_28px_65px_rgba(0,0,0,.35)] sm:rounded-[3rem_3rem_2rem_2rem]">
+                <div className="absolute left-1/2 top-[-8%] h-[13%] w-[40%] -translate-x-1/2 rounded-t-xl bg-[#d4b4a8]" />
+                <div className="absolute inset-x-2 top-[42%] rounded-lg border-y border-white/25 py-2 text-center text-[7px] font-bold tracking-[.18em] text-white/85 sm:inset-x-3 sm:py-5 sm:text-[10px]">SITR • PRIVATE CARE</div>
               </div>
-              <span className="absolute right-7 top-6 text-[9px] font-bold tracking-[.24em] text-[#8c6662] sm:right-10 sm:top-9 sm:text-xs">SITR • PRIVATE CARE</span>
+              <div className="absolute bottom-4 right-4 rounded-xl border border-white/10 bg-[#211b1c]/75 px-3 py-2.5 backdrop-blur-md sm:bottom-8 sm:right-8 sm:rounded-2xl sm:px-5 sm:py-4">
+                <p className="text-[9px] text-white/55 sm:text-xs">سِتر — مساحتك الخاصة</p>
+                <p className="mt-1 text-xs font-semibold text-white sm:text-base">تجربة أهدأ. اختيار أوضح.</p>
+              </div>
+              <span className="absolute left-6 top-6 text-[8px] font-semibold tracking-[.25em] text-[#d7a39a]/75 sm:left-10 sm:top-10 sm:text-[11px]">PRIVATE BY DESIGN</span>
             </div>
           </div>
         </section>
@@ -618,12 +615,12 @@ export default function App() {
           </div>
         </section>
 
-        <section id="products" className="mx-auto max-w-7xl scroll-mt-24 px-4 py-12 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
+        <section id="products" className="mx-auto max-w-7xl scroll-mt-24 px-4 py-11 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
           <div className="mb-6 flex flex-col justify-between gap-5 sm:mb-10 md:flex-row md:items-end">
             <div>
               <p className="mb-3 text-xs font-bold tracking-[.2em] text-[#9a625f]">اختيارات سِتر</p>
-              <h2 className="text-3xl font-semibold tracking-tight sm:text-5xl">
-                مساحتك، اختياراتك
+              <h2 className="text-3xl font-bold tracking-tight sm:text-5xl">
+                اختياراتك بكل سهولة
               </h2>
             </div>
             <div className="category-scroll -mx-4 flex max-w-[calc(100%+2rem)] gap-2 overflow-x-auto px-4 pb-2 sm:mx-0 sm:max-w-full sm:px-0">
@@ -631,7 +628,7 @@ export default function App() {
                 <button
                   key={item}
                   onClick={() => setCategory(item)}
-                  className={`shrink-0 rounded-full px-5 py-2.5 text-sm transition ${category === item ? "bg-[#2d2524] text-white" : "border border-[#d8cbc7] hover:bg-white"}`}
+                  className={`min-h-10 shrink-0 rounded-full px-4 py-2.5 text-xs font-semibold transition sm:px-5 sm:text-sm ${category === item ? "bg-[#2d2524] text-white shadow-md shadow-black/10" : "border border-[#d8cbc7] bg-white/70 text-[#5e5050] hover:bg-white"}`}
                 >
                   {item}
                 </button>
@@ -646,7 +643,7 @@ export default function App() {
           </label>
           <div className="grid grid-cols-2 gap-3 sm:gap-x-5 sm:gap-y-8 lg:grid-cols-3">
             {filteredProducts.map((product) => (
-              <article key={product.id} className="group min-w-0 overflow-hidden rounded-[1.2rem] border border-[#e9dfda] bg-white p-2 shadow-[0_5px_20px_rgba(66,43,39,.045)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_42px_rgba(66,43,39,.10)] sm:rounded-[1.75rem] sm:p-4">
+              <article key={product.id} className="group flex min-w-0 flex-col overflow-hidden rounded-[1.2rem] border border-[#e9dfda] bg-white p-2.5 shadow-[0_5px_20px_rgba(66,43,39,.045)] transition duration-300 sm:rounded-[1.75rem] sm:p-4 sm:hover:-translate-y-1 sm:hover:shadow-[0_18px_42px_rgba(66,43,39,.10)]">
                 <div className="relative overflow-hidden rounded-[1rem] sm:rounded-[1.5rem]">
                   <ProductVisual product={product} />
                   {product.badge && (
@@ -662,7 +659,7 @@ export default function App() {
                     {product.price > 0 ? "أضف إلى السلة" : "بانتظار تحديد السعر"}
                   </button>
                 </div>
-                <div className="mt-3 flex min-w-0 flex-col gap-1 px-0.5 sm:mt-5 sm:flex-row sm:items-start sm:justify-between sm:gap-4 sm:px-1">
+                <div className="mt-3 flex min-w-0 flex-1 flex-col gap-1 px-0.5 sm:mt-5 sm:flex-row sm:items-start sm:justify-between sm:gap-4 sm:px-1">
                   <div>
                     <p className="mb-1 text-[9px] font-semibold text-[#9a6a65] sm:mb-1.5 sm:text-[11px]">
                       {product.category}
@@ -700,7 +697,7 @@ export default function App() {
           )}
         </section>
 
-        <section id="privacy" className="bg-[#2d2524] text-white">
+        <section id="privacy" className="scroll-mt-20 bg-[#2d2524] text-white">
           <div className="mx-auto grid max-w-7xl gap-12 px-5 py-20 lg:grid-cols-2 lg:items-center lg:px-8 lg:py-28">
             <div>
               <p className="mb-4 text-xs font-bold tracking-[.2em] text-[#d0a39c]">
