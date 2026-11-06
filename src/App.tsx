@@ -58,7 +58,26 @@ declare global {
   }
 }
 
-const products: Product[] = [];
+const products: Product[] = [
+  {
+    id: 1,
+    name: "Durex Extended Pleasure – 12 قطعة",
+    description: "واقي ذكري من اللاتكس الطبيعي مع مزلق Performa يحتوي على 5% بنزوكايين. يُستخدم مرة واحدة فقط، مع قراءة النشرة والتحذيرات داخل العبوة.",
+    price: 75,
+    category: "للرجال",
+    image: "https://cdn11.bigcommerce.com/s-g585yu857h/images/stencil/1280w/products/14683/25772/5052197036428_T1__26362.1783595686.png",
+    badge: "12 قطعة",
+  },
+  {
+    id: 2,
+    name: "Durex Play Sensual Massage 2-in-1 – 200ml",
+    description: "جل مائي للتدليك والترطيب الحميمي برائحة Ylang Ylang. متوافق مع الواقيات المصنوعة من اللاتكس الطبيعي وفق وصف الشركة؛ تجنّب ملامسة العينين وأوقف الاستخدام عند حدوث تهيّج.",
+    price: 54,
+    category: "جل ومزلقات",
+    image: "https://static.polza.ru/iblock/3d3/3d3a8d3062c963981bd6484ef4f26240/71bb0a075680c19b7fc42acf8e46fc83.jpeg?fmt=avif&quality=100",
+    badge: "200 مل",
+  },
+];
 
 const categories = ["الكل", "للنساء", "للرجال", "للأزواج", "عناية", "جل ومزلقات", "صيدلية"] as const;
 
