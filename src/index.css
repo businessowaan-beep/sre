@@ -1,0 +1,91 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "IBM Plex Sans Arabic", sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: "IBM Plex Sans Arabic", sans-serif;
+    background: #f8f5f1;
+  }
+
+  button,
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  ::selection {
+    background: #6e3940;
+    color: white;
+  }
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.age-card {
+  animation: age-in 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.hero-art::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 76% 26%, rgba(255, 255, 255, 0.65), transparent 30%),
+    linear-gradient(145deg, transparent 55%, rgba(112, 72, 70, 0.08));
+  border-radius: inherit;
+}
+
+.product-visual {
+  position: relative;
+  overflow: hidden;
+  background: #e8ded9;
+  transition: transform 0.5s ease;
+}
+
+.group:hover .product-visual {
+  transform: scale(0.985);
+}
+
+.mini-product {
+  position: relative;
+  width: 78px;
+  height: 92px;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #e8ded9;
+}
+
+@keyframes age-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
