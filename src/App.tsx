@@ -185,6 +185,33 @@ const products: Product[] = [
     image: "https://carexcondoms.com/wp-content/uploads/2018/07/Products_0011_Ecstasy-600x600.jpg",
     badge: "منقّط – 12 قطعة",
   },
+  {
+    id: 15,
+    name: "Astroglide Liquid Personal Lubricant – 73.9ml",
+    description: "مزلق شخصي سائل بقاعدة مائية، سهل التنظيف وغير لزج وفق وصف الشركة المصنّعة. متوافق مع واقيات اللاتكس الطبيعي فقط؛ راجع تعليمات العبوة قبل الاستخدام.",
+    price: 100,
+    category: "جل ومزلقات",
+    image: "https://a.lifecarepharmacykw.com/assets/f/ws/637960786525788246.jpg",
+    badge: "مائي – 73.9 مل",
+  },
+  {
+    id: 16,
+    name: "Avalon K-Jelly Lubricating Gel – 115g",
+    description: "جل مزلق شفاف قابل للذوبان في الماء وغير دهني، بتركيبة هيدروكسي إيثيل سيلولوز وماء منقّى. للاستعمال الخارجي فقط.",
+    price: 100,
+    category: "جل ومزلقات",
+    image: "https://cdn.salla.sa/onqKZz/0c2b84c3-f4ab-4506-8ff0-b6efd90274f2-1000x1000-cu0g6KbWNehKV9Ij3MGlYZEsuZz1MSDwonNhlepT.jpg",
+    badge: "115 جم",
+  },
+  {
+    id: 17,
+    name: "Durex Play Massage 2-in-1 Aloe Vera – 200ml",
+    description: "جل مائي للتدليك والترطيب الحميمي بالألوفيرا، سهل الغسل ومناسب للاستخدام مع واقيات Durex وفق وصف المنتج. أوقف الاستخدام عند حدوث تهيّج.",
+    price: 100,
+    category: "جل ومزلقات",
+    image: "https://pharmazone.com/cdn/shop/files/16481-DUREXPLAY2x1MASSAGE200ML_JPG.webp?v=1746616194",
+    badge: "ألوفيرا – 200 مل",
+  },
 ];
 
 const categories = ["الكل", "للنساء", "للرجال", "للأزواج", "عناية", "جل ومزلقات", "صيدلية"] as const;
