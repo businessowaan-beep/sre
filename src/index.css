@@ -119,3 +119,32 @@
     border-radius: 1.25rem;
   }
 }
+
+
+/* Mobile-first storefront refinements */
+.product-visual {
+  display: grid;
+  place-items: center;
+  background: linear-gradient(145deg, #f3ece8, #e8dcd6);
+}
+.product-visual img {
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
+@media (max-width: 1023px) {
+  body {
+    padding-bottom: calc(5.5rem + env(safe-area-inset-bottom));
+  }
+}
+@media (max-width: 639px) {
+  html {
+    scroll-padding-top: 5.5rem;
+  }
+  .category-scroll {
+    padding-bottom: .5rem;
+    overscroll-behavior-x: contain;
+  }
+  .product-visual {
+    border-radius: 1rem;
+  }
+}
