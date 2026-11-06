@@ -286,11 +286,11 @@ function Icon({
 
 function ProductVisual({ product, large = false }: { product: Product; large?: boolean }) {
   return (
-    <div className={`product-visual ${large ? "h-[430px]" : "h-[285px]"}`}>
+    <div className={`product-visual ${large ? "h-[430px]" : "aspect-square h-auto sm:aspect-auto sm:h-[285px]"}`}>
       <img
         src={product.image}
         alt={product.name}
-        className={`h-full w-full ${product.image.endsWith(".svg") ? "object-contain p-5" : "object-cover"}`}
+        className="h-full w-full object-contain p-3 sm:p-5"
         loading="lazy"
       />
     </div>
@@ -383,6 +383,7 @@ export default function App() {
     () => sessionStorage.getItem("sitr-age") === "yes",
   );
   const [category, setCategory] = useState<(typeof categories)[number]>("الكل");
+  const [searchQuery, setSearchQuery] = useState("");
   const [cart, setCart] = useState<CartItem[]>([]);
   const [cartOpen, setCartOpen] = useState(false);
   const [mobileMenu, setMobileMenu] = useState(false);
@@ -414,8 +415,12 @@ export default function App() {
     localStorage.setItem("sitr-cart", JSON.stringify(cart));
   }, [cart]);
 
-  const filteredProducts =
-    category === "الكل" ? products : products.filter((p) => p.category === category);
+  const filteredProducts = products.filter((product) => {
+    const matchesCategory = category === "الكل" || product.category === category;
+    const query = searchQuery.trim().toLocaleLowerCase("ar");
+    const matchesSearch = !query || `${product.name} ${product.description} ${product.category}`.toLocaleLowerCase("ar").includes(query);
+    return matchesCategory && matchesSearch;
+  });
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
   const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const shipping = subtotal >= 399 || subtotal === 0 ? 0 : 25;
@@ -521,121 +526,71 @@ export default function App() {
         تغليف محايد 100% — لا اسم للمتجر ولا وصف للمحتوى على الشحنة
       </div>
 
-      <header className="sticky top-0 z-40 border-b border-black/5 bg-[#f8f5f1]/90 backdrop-blur-xl">
-        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 lg:px-8">
-          <button
-            className="lg:hidden"
-            aria-label="فتح القائمة"
-            onClick={() => setMobileMenu(!mobileMenu)}
-          >
-            <Icon name={mobileMenu ? "x" : "menu"} />
-          </button>
-          <a href="#" className="text-2xl font-bold tracking-tight">
-            سِتر<span className="text-[#a56c68]">.</span>
-          </a>
+      <header className="sticky top-0 z-40 border-b border-black/5 bg-[#fbf8f5]/95 shadow-[0_4px_18px_rgba(55,35,32,.035)] backdrop-blur-xl">
+        <div className="mx-auto flex h-[4.25rem] max-w-7xl items-center justify-between px-4 sm:h-20 sm:px-6 lg:px-8">
+          <a href="#" className="text-[1.65rem] font-bold tracking-tight sm:text-2xl">سِتر<span className="text-[#a56c68]">.</span></a>
           <nav className="hidden items-center gap-8 text-sm font-medium lg:flex">
-            <a href="#products" className="transition hover:text-[#8f4f52]">
-              المتجر
-            </a>
-            <a href="#privacy" className="transition hover:text-[#8f4f52]">
-              الخصوصية
-            </a>
-            <a href="#about" className="transition hover:text-[#8f4f52]">
-              لماذا سِتر؟
-            </a>
-            <a href="#faq" className="transition hover:text-[#8f4f52]">
-              الأسئلة الشائعة
-            </a>
+            <a href="#products" className="transition hover:text-[#8f4f52]">المتجر</a>
+            <a href="#privacy" className="transition hover:text-[#8f4f52]">الخصوصية</a>
+            <a href="#about" className="transition hover:text-[#8f4f52]">لماذا سِتر؟</a>
+            <a href="#faq" className="transition hover:text-[#8f4f52]">الأسئلة الشائعة</a>
           </nav>
-          <button
-            className="relative flex items-center gap-2"
-            onClick={() => setCartOpen(true)}
-            aria-label="فتح سلة المشتريات"
-          >
-            <Icon name="bag" />
-            <span className="hidden text-sm sm:inline">السلة</span>
-            {cartCount > 0 && (
-              <span className="grid h-5 min-w-5 place-items-center rounded-full bg-[#8f4f52] px-1 text-[10px] text-white">
-                {cartCount}
-              </span>
-            )}
-          </button>
+          <div className="flex items-center gap-2">
+            <a href="#products" className="hidden rounded-full border border-[#d8cbc7] px-4 py-2 text-xs font-semibold sm:inline-flex">تصفّح المنتجات</a>
+            <button className="relative inline-flex min-h-11 items-center gap-2 rounded-full bg-[#2d2524] px-4 text-sm font-semibold text-white transition hover:bg-[#6e3940]" onClick={() => setCartOpen(true)} aria-label="فتح سلة المشتريات">
+              <Icon name="bag" className="h-4 w-4" /> <span>السلة</span>
+              {cartCount > 0 && <span className="grid h-5 min-w-5 place-items-center rounded-full bg-white px-1 text-[10px] text-[#6e3940]">{cartCount}</span>}
+            </button>
+          </div>
         </div>
-        {mobileMenu && (
-          <nav className="grid gap-4 border-t border-black/5 px-6 py-5 text-sm lg:hidden">
-            <a href="#products" onClick={() => setMobileMenu(false)}>
-              المتجر
-            </a>
-            <a href="#privacy" onClick={() => setMobileMenu(false)}>
-              الخصوصية
-            </a>
-            <a href="#about" onClick={() => setMobileMenu(false)}>
-              لماذا سِتر؟
-            </a>
-            <a href="#faq" onClick={() => setMobileMenu(false)}>
-              الأسئلة الشائعة
-            </a>
-          </nav>
-        )}
       </header>
 
       <main>
-        <section className="overflow-hidden">
-          <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 py-12 lg:grid-cols-[1.05fr_.95fr] lg:px-8 lg:py-20">
-            <div className="max-w-2xl">
-              <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-[#d9c8c3] bg-white/60 px-4 py-2 text-xs font-semibold text-[#75464a]">
-                <Icon name="shield" className="h-4 w-4" />
-                خصوصيتك أولويتنا، دائمًا
+        <section className="relative overflow-hidden bg-[#f1e9e4]">
+          <div className="absolute -left-24 -top-24 h-72 w-72 rounded-full bg-[#d8bdb5]/35 blur-3xl" />
+          <div className="mx-auto grid max-w-7xl items-center gap-7 px-4 pb-9 pt-8 sm:px-6 sm:py-14 lg:grid-cols-[1.05fr_.95fr] lg:px-8 lg:py-20">
+            <div className="relative z-10 max-w-2xl">
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#d7c3bc] bg-white/70 px-3 py-2 text-[11px] font-semibold text-[#75464a] sm:mb-6 sm:px-4 sm:text-xs">
+                <Icon name="shield" className="h-4 w-4" /> خصوصية وراحة من أول خطوة
               </div>
-              <h1 className="text-balance text-5xl font-semibold leading-[1.15] tracking-tight sm:text-6xl lg:text-7xl">
-                لحظاتك الخاصة،
-                <br />
-                <span className="text-[#95615d]">بطريقتك أنت.</span>
+              <h1 className="text-balance text-[2.55rem] font-semibold leading-[1.18] tracking-tight sm:text-6xl lg:text-7xl">
+                عنايتك الخاصة،
+                <span className="block text-[#95615d]">بكل راحة وخصوصية.</span>
               </h1>
-              <p className="mt-6 max-w-xl text-base leading-8 text-[#746866] sm:text-lg">
-                منتجات عناية حميمة مختارة بعناية للبالغين، بجودة موثوقة وتوصيل سري إلى دول الخليج
-                وفق الأنظمة المحلية.
+              <p className="mt-4 max-w-xl text-sm leading-7 text-[#746866] sm:mt-6 sm:text-lg sm:leading-8">
+                اكتشف منتجات مختارة للبالغين، وتسوّق بتجربة بسيطة وواضحة وتغليف محايد يحترم خصوصيتك.
               </p>
-              <div className="mt-9 flex flex-wrap gap-3">
-                <a
-                  href="#products"
-                  className="inline-flex items-center gap-3 rounded-full bg-[#2d2524] px-7 py-4 font-semibold text-white transition hover:bg-[#6e3940]"
-                >
-                  اكتشف المنتجات <Icon name="arrow" className="h-4 w-4 rotate-180" />
+              <div className="mt-6 grid grid-cols-1 gap-3 sm:mt-8 sm:flex sm:flex-wrap">
+                <a href="#products" className="inline-flex min-h-14 items-center justify-center gap-3 rounded-2xl bg-[#2d2524] px-7 py-4 text-sm font-semibold text-white shadow-lg shadow-[#2d2524]/10 transition hover:bg-[#6e3940] sm:rounded-full sm:text-base">
+                  تسوّق الآن <Icon name="arrow" className="h-4 w-4 rotate-180" />
                 </a>
-                <a
-                  href="#privacy"
-                  className="rounded-full border border-[#bfaeaa] px-7 py-4 font-semibold transition hover:bg-white"
-                >
-                  كيف نحمي خصوصيتك؟
+                <a href="#privacy" className="inline-flex min-h-14 items-center justify-center rounded-2xl border border-[#bfaeaa] bg-white/55 px-6 py-4 text-sm font-semibold transition hover:bg-white sm:rounded-full sm:text-base">
+                  تعرّف على سياسة الخصوصية
                 </a>
               </div>
-              <div className="mt-10 flex flex-wrap gap-x-7 gap-y-3 text-xs text-[#6f6260]">
-                <span className="flex items-center gap-2">
-                  <Icon name="lock" className="h-4 w-4" /> دفع آمن
-                </span>
-                <span className="flex items-center gap-2">
-                  <Icon name="truck" className="h-4 w-4" /> شحن سري
-                </span>
-                <span className="flex items-center gap-2">
-                  <Icon name="shield" className="h-4 w-4" /> بيانات محمية
-                </span>
+              <div className="mt-6 flex flex-wrap gap-x-5 gap-y-3 text-[11px] text-[#6f6260] sm:mt-9 sm:gap-x-7 sm:text-xs">
+                <span className="flex items-center gap-2"><Icon name="lock" className="h-4 w-4" /> خصوصية الطلب</span>
+                <span className="flex items-center gap-2"><Icon name="truck" className="h-4 w-4" /> تغليف محايد</span>
+                <span className="flex items-center gap-2"><Icon name="shield" className="h-4 w-4" /> خيارات واضحة</span>
               </div>
             </div>
-            <div className="hero-art relative min-h-[470px] rounded-[2.5rem] bg-[#e8dbd5] p-7 sm:min-h-[580px]">
-              <div className="absolute inset-7 rounded-[2rem] border border-white/50" />
-              <div className="absolute right-[18%] top-[15%] h-[56%] w-[32%] rotate-[11deg] rounded-[5rem] bg-gradient-to-br from-[#7d474b] to-[#3d262a] shadow-[0_35px_70px_rgba(86,49,52,.28)]">
-                <span className="absolute left-1/2 top-[11%] h-2 w-2 -translate-x-1/2 rounded-full bg-[#d9aaa1]" />
-                <span className="absolute bottom-[18%] left-1/2 h-16 w-16 -translate-x-1/2 rounded-full border border-white/20" />
+            <div className="relative mx-auto flex min-h-[245px] w-full max-w-xl items-center justify-center overflow-hidden rounded-[2rem] border border-white/60 bg-gradient-to-br from-[#dfc9c0] via-[#eadbd4] to-[#c9a9a1] p-5 shadow-[0_24px_60px_rgba(86,49,52,.10)] sm:min-h-[430px] sm:rounded-[2.5rem] sm:p-8">
+              <div className="absolute inset-4 rounded-[1.5rem] border border-white/45 sm:inset-6 sm:rounded-[2rem]" />
+              <div className="relative grid w-full max-w-[390px] grid-cols-2 items-end gap-3 sm:gap-5">
+                <div className="rounded-[1.5rem] bg-white/75 p-3 shadow-xl shadow-[#70484a]/10 backdrop-blur sm:rounded-[2rem] sm:p-5">
+                  <div className="mb-3 flex aspect-[4/5] items-center justify-center overflow-hidden rounded-[1.1rem] bg-[#f4eeea] sm:rounded-[1.5rem]">
+                    <div className="h-[72%] w-[48%] rounded-[2.5rem_2.5rem_1.5rem_1.5rem] bg-gradient-to-b from-[#b47b78] to-[#74434a] shadow-xl" />
+                  </div>
+                  <p className="text-center text-[10px] font-semibold text-[#765451] sm:text-xs">اختيارات بعناية</p>
+                </div>
+                <div className="translate-y-5 rounded-[1.5rem] bg-[#6e3940] p-3 text-white shadow-xl shadow-[#70484a]/20 sm:translate-y-8 sm:rounded-[2rem] sm:p-5">
+                  <div className="mb-3 flex aspect-[4/5] items-center justify-center overflow-hidden rounded-[1.1rem] bg-[#8b5b5d] sm:rounded-[1.5rem]">
+                    <div className="h-[68%] w-[52%] rounded-[1.5rem] border border-white/30 bg-gradient-to-b from-[#e2c7bd] to-[#b8867e] shadow-xl" />
+                  </div>
+                  <p className="text-center text-[10px] font-semibold text-white/90 sm:text-xs">خصوصية بكل تفصيل</p>
+                </div>
               </div>
-              <div className="absolute bottom-[16%] left-[15%] h-[39%] w-[25%] -rotate-[14deg] rounded-[4rem_4rem_2.5rem_2.5rem] bg-gradient-to-br from-[#cda39a] to-[#aa716d] shadow-[0_30px_60px_rgba(86,49,52,.2)]" />
-              <div className="absolute bottom-7 left-7 rounded-2xl bg-white/85 p-4 shadow-lg backdrop-blur">
-                <p className="text-xs text-[#7f706e]">الشحن إلى الخليج</p>
-                <p className="mt-1 font-semibold">بعلبة محايدة بلا تفاصيل</p>
-              </div>
-              <span className="absolute left-[14%] top-[18%] text-xs font-semibold tracking-[.2em] text-[#8c6662]">
-                PRIVATE CARE
-              </span>
+              <span className="absolute right-7 top-6 text-[9px] font-bold tracking-[.24em] text-[#8c6662] sm:right-10 sm:top-9 sm:text-xs">SITR • PRIVATE CARE</span>
             </div>
           </div>
         </section>
@@ -663,15 +618,15 @@ export default function App() {
           </div>
         </section>
 
-        <section id="products" className="mx-auto max-w-7xl px-5 py-20 lg:px-8 lg:py-28">
-          <div className="mb-10 flex flex-col justify-between gap-7 md:flex-row md:items-end">
+        <section id="products" className="mx-auto max-w-7xl scroll-mt-24 px-4 py-12 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
+          <div className="mb-6 flex flex-col justify-between gap-5 sm:mb-10 md:flex-row md:items-end">
             <div>
               <p className="mb-3 text-xs font-bold tracking-[.2em] text-[#9a625f]">اختيارات سِتر</p>
-              <h2 className="text-4xl font-semibold tracking-tight sm:text-5xl">
+              <h2 className="text-3xl font-semibold tracking-tight sm:text-5xl">
                 مساحتك، اختياراتك
               </h2>
             </div>
-            <div className="category-scroll flex max-w-full gap-2 overflow-x-auto pb-2">
+            <div className="category-scroll -mx-4 flex max-w-[calc(100%+2rem)] gap-2 overflow-x-auto px-4 pb-2 sm:mx-0 sm:max-w-full sm:px-0">
               {categories.map((item) => (
                 <button
                   key={item}
@@ -684,13 +639,18 @@ export default function App() {
             </div>
           </div>
 
-          <div className="grid gap-x-5 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+          <label className="mb-5 flex min-h-12 items-center gap-3 rounded-2xl border border-[#e2d6d1] bg-white px-4 shadow-sm sm:mb-7 sm:max-w-md">
+            <span className="text-lg text-[#9a7772]" aria-hidden="true">⌕</span>
+            <input value={searchQuery} onChange={(event) => setSearchQuery(event.target.value)} placeholder="ابحث عن منتج أو تصنيف..." className="w-full bg-transparent text-sm outline-none placeholder:text-[#a59691]" aria-label="ابحث عن المنتجات" />
+            {searchQuery && <button type="button" onClick={() => setSearchQuery("")} className="text-xs font-semibold text-[#8f4f52]">مسح</button>}
+          </label>
+          <div className="grid grid-cols-2 gap-3 sm:gap-x-5 sm:gap-y-8 lg:grid-cols-3">
             {filteredProducts.map((product) => (
-              <article key={product.id} className="group overflow-hidden rounded-[1.75rem] border border-[#e9dfda] bg-white/80 p-3 shadow-[0_8px_30px_rgba(66,43,39,.045)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_42px_rgba(66,43,39,.10)] sm:p-4">
-                <div className="relative overflow-hidden rounded-[1.75rem]">
+              <article key={product.id} className="group min-w-0 overflow-hidden rounded-[1.2rem] border border-[#e9dfda] bg-white p-2 shadow-[0_5px_20px_rgba(66,43,39,.045)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_42px_rgba(66,43,39,.10)] sm:rounded-[1.75rem] sm:p-4">
+                <div className="relative overflow-hidden rounded-[1rem] sm:rounded-[1.5rem]">
                   <ProductVisual product={product} />
                   {product.badge && (
-                    <span className="absolute right-4 top-4 rounded-full bg-white/90 px-3 py-1.5 text-[11px] font-semibold shadow-sm">
+                    <span className="absolute right-2 top-2 rounded-full bg-white/95 px-2 py-1 text-[9px] font-semibold shadow-sm sm:right-4 sm:top-4 sm:px-3 sm:py-1.5 sm:text-[11px]">
                       {product.badge}
                     </span>
                   )}
@@ -702,17 +662,17 @@ export default function App() {
                     {product.price > 0 ? "أضف إلى السلة" : "بانتظار تحديد السعر"}
                   </button>
                 </div>
-                <div className="mt-5 flex items-start justify-between gap-4 px-1">
+                <div className="mt-3 flex min-w-0 flex-col gap-1 px-0.5 sm:mt-5 sm:flex-row sm:items-start sm:justify-between sm:gap-4 sm:px-1">
                   <div>
-                    <p className="mb-1.5 text-[11px] font-semibold text-[#9a6a65]">
+                    <p className="mb-1 text-[9px] font-semibold text-[#9a6a65] sm:mb-1.5 sm:text-[11px]">
                       {product.category}
                     </p>
-                    <h3 className="text-lg font-semibold">{product.name}</h3>
-                    <p className="mt-2 max-w-xs text-sm leading-6 text-[#7a6d6b]">
+                    <h3 className="line-clamp-2 min-h-[2.6em] text-[12px] font-semibold leading-5 sm:text-lg sm:leading-7">{product.name}</h3>
+                    <p className="mt-1 hidden max-w-xs text-sm leading-6 text-[#7a6d6b] sm:mt-2 sm:block">
                       {product.description}
                     </p>
                   </div>
-                  <p className="shrink-0 pt-5 text-left font-bold">
+                  <p className="pt-1 text-right text-sm font-bold sm:shrink-0 sm:pt-5 sm:text-left">
                     {product.price > 0 ? (
                       <>{product.price} <span className="text-xs font-medium">ر.س</span></>
                     ) : (
@@ -723,7 +683,7 @@ export default function App() {
                 <button
                   onClick={() => addToCart(product)}
                   disabled={product.price <= 0}
-                  className="mt-4 w-full rounded-full border border-[#cfc0bc] py-3 text-sm font-semibold transition hover:border-[#6e3940] hover:bg-[#f8f1ee] disabled:cursor-not-allowed disabled:opacity-60 sm:hidden"
+                  className="mt-2 min-h-10 w-full rounded-xl bg-[#6e3940] py-2 text-[11px] font-semibold text-white transition hover:bg-[#572c32] disabled:cursor-not-allowed disabled:opacity-60 sm:hidden"
                 >
                   {product.price > 0 ? "أضف إلى السلة" : "بانتظار تحديد السعر"}
                 </button>
@@ -835,6 +795,12 @@ export default function App() {
           للبالغين +18 فقط — جميع الطلبات خاضعة للأنظمة المحلية في بلد التوصيل
         </div>
       </footer>
+
+      <nav className="fixed inset-x-3 bottom-3 z-40 grid grid-cols-3 gap-1 rounded-2xl border border-white/70 bg-[#fffdfa]/95 p-2 shadow-[0_12px_40px_rgba(44,30,28,.18)] backdrop-blur-xl lg:hidden" aria-label="التنقل السريع">
+        <a href="#" className="flex min-h-11 flex-col items-center justify-center gap-0.5 rounded-xl text-[10px] font-semibold text-[#6e3940]"><span className="text-base">⌂</span>الرئيسية</a>
+        <a href="#products" className="flex min-h-11 flex-col items-center justify-center gap-0.5 rounded-xl text-[10px] font-semibold text-[#6e3940]"><span className="text-base">▦</span>المنتجات</a>
+        <button onClick={() => setCartOpen(true)} className="flex min-h-11 flex-col items-center justify-center gap-0.5 rounded-xl text-[10px] font-semibold text-[#6e3940]"><span className="relative text-base">♧{cartCount > 0 && <span className="absolute -right-2 -top-1 grid h-4 min-w-4 place-items-center rounded-full bg-[#6e3940] px-1 text-[9px] text-white">{cartCount}</span>}</span>السلة</button>
+      </nav>
 
       {cartOpen && (
         <div className="fixed inset-0 z-50">
