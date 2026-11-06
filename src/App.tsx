@@ -699,7 +699,7 @@ export default function App() {
                 مساحتك، اختياراتك
               </h2>
             </div>
-            <div className="flex max-w-full gap-2 overflow-x-auto pb-2">
+            <div className="category-scroll flex max-w-full gap-2 overflow-x-auto pb-2">
               {categories.map((item) => (
                 <button
                   key={item}
